@@ -15,7 +15,7 @@ def parse_args():
     
     parser.add_argument('--id',
                         help='To rotated page from student id folder',
-                        default="111C52032",
+                        default="111C51502",
                         type=str)
 
     args = parser.parse_args()
@@ -143,7 +143,7 @@ def rotate_img(file_path, index) -> bool:
         return False
     height, width, _ = img.shape
     print( height,width)
-    img= cv2.resize(img, (1654*3, 2339*3), interpolation=cv2.INTER_NEAREST)
+    img= cv2.resize(img, (1654*3, 2339*3), interpolation=cv2.INTER_NEAREST)  # Modified by Feiwen, 2023-11-05
     height, width, _ = img.shape
 
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)

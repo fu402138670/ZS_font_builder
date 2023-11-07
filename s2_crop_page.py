@@ -154,10 +154,10 @@ def scaleAdjustment(word_img, adjustCentroid=True):
     # bot_y = min(h, cY + block_size_half)
 
     h, w, _ = word_img_copy.shape
-    left_x = max(0, cX - int(250/2))
-    right_x = min(w, cX + int(250/2))
-    top_y = max(0, cY - int(250/2))
-    bot_y = min(h, cY + int(250/2))
+    left_x = max(0, cX - int(250/2))  # changed the blank margin, modified by CY, 2023-11-06
+    right_x = min(w, cX + int(250/2))  # changed the blank margin, modified by CY, 2023-11-06
+    top_y = max(0, cY - int(250/2))  # changed the blank margin, modified by CY, 2023-11-06
+    bot_y = min(h, cY + int(250/2))  # changed the blank margin, modified by CY, 2023-11-06
 
     finalWordImg = word_img_copy[top_y:bot_y, left_x:right_x]
     # sourceFile = open('demo.txt', 'w')
@@ -201,8 +201,8 @@ def setPointImageFromPath(args) -> str:
         image = colorBoost
 
     # 以 HSV 獲取綠色區塊的 mask
-    lower_green = np.array([10, 30, 80]) # 綠色在 HSV 的範圍
-    upper_green = np.array([80, 255, 255]) # 綠色到淺藍在 HSV 的範圍
+    lower_green = np.array([10, 30, 80]) # 綠色在 HSV 的範圍, modified by CY, 2023-11-06
+    upper_green = np.array([80, 255, 255]) # 綠色到淺藍在 HSV 的範圍, modified by CY, 2023-11-06
 
     hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
     mask = cv2.inRange(hsv, lower_green, upper_green)
@@ -358,12 +358,12 @@ def outputResult(PAGE_START, PAGE_END, results, time):
 def main(args):
     global PROCESS_END
 
-    # PAGE_START = input("Please enter the number of pages you want to start processing(default:1): ")
-    # if not PAGE_START.strip():
-    PAGE_START = 1
-    # PAGE_END = input("Please enter the number of pages you want to end processing(default:138): ")
-    # if not PAGE_END.strip():
-    PAGE_END = 17
+    # PAGE_START = input("Please enter the number of pages you want to start processing(default:1): ")  # skip input
+    # if not PAGE_START.strip():  # skip input
+    PAGE_START = 1  # skip input
+    # PAGE_END = input("Please enter the number of pages you want to end processing(default:138): ")  # skip input
+    # if not PAGE_END.strip():  # skip input
+    PAGE_END = 17  # skip input
     PAGE_START = int(PAGE_START)
     PAGE_END = int(PAGE_END)
 
@@ -422,7 +422,7 @@ def main(args):
 
 if __name__ == '__main__':
     PROCESS_END = False # 勿改
-    MULTIPROCESSING = False # 多進程，True不能顯示切割過程，無法中途停下
+    MULTIPROCESSING = True # 多進程，True不能顯示切割過程，無法中途停下
     ADJUST_CENTROID = True # 文字重心對齊
     SHOW = False # 顯示切割過程
     SCALE = 20 # 電子檔設5，紙本設20
